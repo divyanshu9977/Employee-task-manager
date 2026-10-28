@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="name" placeholder="Enter Your Name">
+    <input type="text" id="task" placeholder="Enter Task">
+    <button id="btn" onclick="addTask()">Add task</button>
+    <br></br>
+    <table border="1" id="taskTable">
+        <tr>
+            <th>Name</th>
+            <th>Task</th>
+            <th>status</th>
+            <th>Action</th>
+        </tr>
+    </table>
+    <h3 id="error"></h3>
+
+    <script>
+        function addTask(){
+            let name = document.getElementById("name").value;
+            let task = document.getElementById("task").value;
+            let msg = document.getElementById("error");
+
+            if(name.trim() !== "" && task.trim() !== ""){
+                msg.innerText = "";
+
+                let table = document.getElementById("taskTable");
+            
+                let row = table.insertRow();
+                let cell1 = row.insertCell(0);
+                let cell2 = row.insertCell(1);
+                let cell3 = row.insertCell(2);
+                let cell4 = row.insertCell(3);
+
+
+                cell1.innerText = name;
+                cell2.innerText = task;
+                cell3.innerText = "Pending";
+
+                //action button
+                let btn = document.createElement("button");
+                btn.innerText = "complete";
+                
+
+                btn.onclick = function(){
+                    cell3.innerText = "Completed";
+                    btn.disabled = true;
+                }
+                
+                let dlt = document.createElement("button");
+                dlt.innerText = "Remove";
+
+                dlt.onclick = function(){
+                    row.remove();
+                }
+
+
+                cell4.appendChild(btn);
+                cell4.appendChild(dlt);
+            }else{
+                msg.innerText = "Please provide Valid input";
+            }
+
+           
+        }
+
+    </script>
+</body>
+</html>
